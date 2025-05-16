@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NOTES</title>
+    <link rel="icon" type="image/svg+xml" href="images/iconNotes.svg" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body
+    class="h-screen bg-linear-35 from-0% from-slate-950 via-60% via-slate-500 to-85% to-slate-900"
+  >
+    <header class="py-8">
+      <div class="flex max-w-7xl mx-auto justify-center items-center relative">
+        <h1
+          class="text-center uppercase font-bold text-5xl text-lime-400 font-mono"
+        >
+          My Notes &#128221;
+        </h1>
+        <button
+          id="addButton"
+          class="rounded-md border border-transparent hover:bg- text-center text-lg p-3 transition-all absolute right-12 cursor-pointer group"
+          type="button"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="40"
+            height="40"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="stroke-lime-500 group-hover:stroke-lime-300 group-hover:scale-125 transition-transform"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"
+            />
+            <path
+              d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"
+            />
+            <path d="M10 14h4" />
+            <path d="M12 12v4" />
+          </svg>
+        </button>
+        <button
+          id="clearButton"
+          class="rounded-md border border-transparent hover:bg- text-center text-lg p-3 transition-all absolute right-0 cursor-pointer group"
+          type="button"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="35"
+            height="35"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="stroke-lime-500 group-hover:stroke-lime-300 group-hover:scale-125 transition-transform"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M20.048 16.033a9 9 0 0 0 -12.094 -12.075m-2.321 1.682a9 9 0 0 0 12.733 12.723"
+            />
+            <path d="M3 3l18 18" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="h-2/3">
+      <section id="windowsNotes" class="hidden p-8">
+        <div class="flex flex-col justify-center items-center">
+          <input id="inputId" type="hidden" value="" />
+          <textarea
+            id="inputNotes"
+            placeholder="Escribe tu nota..."
+            class="flex justify-center w-1/2 items-center border rounded-sm border-gray-800 shadow-xl bg-green-50 text-lg text-gray-700 font-semibold italic p-2"
+          ></textarea>
+          <div class="flex justify-evenly items-center gap-10 p-6">
+            <button
+              id="saveButton"
+              class="flex items-center shadow-md rounded-sm text-center p-2 bg-lime-500 w-24 gap-2 cursor-pointer"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                class="stroke-black"
+              >
+                <g fill="none" stroke="currentColor" stroke-width="2">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M7 21h10a4 4 0 0 0 4-4V7.414a1 1 0 0 0-.293-.707l-3.414-3.414A1 1 0 0 0 16.586 3H7a4 4 0 0 0-4 4v10a4 4 0 0 0 4 4"
+                  />
+                  <path
+                    d="M9 3h6v3a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1zm8 18v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"
+                  />
+                  <path stroke-linecap="round" d="M11 17h2" />
+                </g>
+              </svg>
+              Save
+            </button>
+            <button
+              id="editNoteButton"
+              class="hidden items-center shadow-md rounded-sm text-center p-2 bg-lime-500 w-24 gap-2 cursor-pointer"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                class="stroke-black"
+              >
+                <g fill="none" stroke="currentColor" stroke-width="2">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M7 21h10a4 4 0 0 0 4-4V7.414a1 1 0 0 0-.293-.707l-3.414-3.414A1 1 0 0 0 16.586 3H7a4 4 0 0 0-4 4v10a4 4 0 0 0 4 4"
+                  />
+                  <path
+                    d="M9 3h6v3a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1zm8 18v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"
+                  />
+                  <path stroke-linecap="round" d="M11 17h2" />
+                </g>
+              </svg>
+              Edit
+            </button>
+            <button
+              id="closeButton"
+              class="flex items-center shadow-md rounded-sm text-center p-2 bg-lime-500 w-24 gap-2 cursor-pointer"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="stroke-black"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path
+                  d="M3 5a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-14z"
+                />
+                <path d="M9 9l6 6m0 -6l-6 6" />
+              </svg>
+              Close
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="h-full max-w-7xl mx-auto shadow-2xl bg-green-50 rounded-2xl border border-stone-400"
+      >
+        <div id="notesCotainer" class="h-full flex flex-col p-8"></div>
+      </section>
+    </main>
+  </body>
+  <script src="./index.js"></script>
+</html>
