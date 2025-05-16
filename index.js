@@ -1,19 +1,20 @@
 const addButton = document.getElementById("addButton");
+const clearButton = document.getElementById("clearButton");
 const windowsNotes = document.getElementById("windowsNotes");
 const saveButton = document.getElementById("saveButton");
+const editNoteButton = document.getElementById("editNoteButton");
 const closeButton = document.getElementById("closeButton");
 const notesCotainer = document.getElementById("notesCotainer");
-const editNoteButton = document.getElementById("editNoteButton");
-const clearButton = document.getElementById("clearButton");
 const MYNOTES = "MyNotes";
 
 var notes = JSON.parse(localStorage.getItem(MYNOTES)) || [];
 drawingNotes(notes);
 
-//Evento click del boton de agregar del header
+//Evento click del boton agregar del header
 addButton.addEventListener("click", function () {
   windowsNotes.classList.toggle("hidden");
   addButton.classList.toggle("hidden");
+  clearButton.classList.toggle("hidden");
 
   //limpiar el text area
   const inputNotes = document.getElementById("inputNotes");
@@ -27,19 +28,20 @@ addButton.addEventListener("click", function () {
   editNoteButton.classList.remove("flex");
 });
 
-//Evento click del boton de limpiar del header
+//Evento click del boton limpiar del header
 clearButton.addEventListener("click", function () {
   notes = [];
   drawingNotes(notes);
 });
 
-//Evento click del boton de cerrar section windowsNotes
+//Evento click del boton cerrar section windowsNotes
 closeButton.addEventListener("click", function () {
   windowsNotes.classList.toggle("hidden");
   addButton.classList.toggle("hidden");
+  clearButton.classList.toggle("hidden");
 });
 
-//Evento click del boton de guardar section windowsNotes
+//Evento click del boton guardar section windowsNotes
 saveButton.addEventListener("click", function () {
   const inputNotes = document.getElementById("inputNotes");
   if (inputNotes.value.length != 0) {
@@ -58,26 +60,29 @@ saveButton.addEventListener("click", function () {
 
   windowsNotes.classList.toggle("hidden");
   addButton.classList.toggle("hidden");
+  clearButton.classList.toggle("hidden");
 });
 
-//Evento click del boton de editar section windowsNotes
+//Evento click del boton editar section windowsNotes
 editNoteButton.addEventListener("click", function () {
   const inputNotes = document.getElementById("inputNotes");
   const inputId = document.getElementById("inputId");
 
-  notes.forEach((note) => {
-    if (inputId.value == note.id) {
-      note.text = inputNotes.value;
-    }
-  });
+  if (inputNotes.value.length != 0) {
+    notes.forEach((note) => {
+      if (inputId.value == note.id) {
+        note.text = inputNotes.value;
+      }
+    });
+    drawingNotes(notes);
+  }
 
   windowsNotes.classList.toggle("hidden");
   addButton.classList.toggle("hidden");
-
-  drawingNotes(notes);
+  clearButton.classList.toggle("hidden");
 });
 
-//Funcion para dibujar notas
+//Función para dibujar notas
 function drawingNotes(notes) {
   //limpiar el contenedor de notas
   notesCotainer.innerHTML = "";
@@ -143,7 +148,7 @@ function drawingNotes(notes) {
           </div>`;
   });
 
-  //los eventos de los botones internos Edit, Delete y el checkbox
+  //los eventos de botones internos: Edit, Delete y checkbox
   notes.forEach((note) => {
     const editButton = document.getElementById("editButton" + note.id);
     editButton.addEventListener("click", function () {
@@ -165,7 +170,7 @@ function drawingNotes(notes) {
   localStorage.setItem(MYNOTES, JSON.stringify(notes));
 }
 
-//Funcion para eliminar una nota
+//Función para eliminar una nota
 function deleteNote(note) {
   //buscar el indice del id de la nota en el array de notas
   const index = notes.findIndex((noteArray) => {
@@ -177,10 +182,11 @@ function deleteNote(note) {
   drawingNotes(notes);
 }
 
-//Funcion para editar una nota
+//Función para editar una nota
 function editNote(note) {
   windowsNotes.classList.toggle("hidden");
   addButton.classList.toggle("hidden");
+  clearButton.classList.toggle("hidden");
 
   const inputNotes = document.getElementById("inputNotes");
   inputNotes.value = note.text;
